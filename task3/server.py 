@@ -1,0 +1,41 @@
+# server.py (Flask бэкенд)
+from flask import Flask, render_template, request
+from flask_httpauth import HTTPBasicAuth
+import sqlite3
+from datetime import datetime
+
+app = Flask(__name__)
+auth = HTTPBasicAuth()
+users = {"admin": "password"}
+
+def init_db():
+    conn = sqlite3.connect('stats.db')
+    c = conn.cursor()
+    c.execute('''CREATE TABLE IF NOT EXISTS visits
+                 (ip TEXT, city TEXT, device TEXT, url TEXT, ts DATETIME)''')
+    conn.commit()
+    conn.close()
+
+@app.route('/collect', methods=['POST'])
+def collect():
+    data = request.json
+    conn = sqlite3.connect('stats.db')
+    c = conn.cursor()
+    c.execute("INSERT INTO visits VALUES (?,?,?,?,?)",
+              (data['ip'], data['city'], data['device'], data['url'], datetime.now()))
+    conn.commit()
+    conn.close()
+    return 'OK'
+
+@auth.verify_password
+def verify(username, password):
+    return users.get(username) == password
+
+@app.route('/stats')
+@auth.login_required
+def stats():
+    return render_template('stats.html')
+
+if __name__ == '__main__':
+    init_db()
+    app.run()
