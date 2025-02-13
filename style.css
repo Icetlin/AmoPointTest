@@ -1,0 +1,17 @@
+/* Стиль для кругов */
+.error-circle, .success-circle {
+    width: 50px; /* Ширина круга */
+    height: 50px; /* Высота круга */
+    border-radius: 50%; /* Делаем круг */
+    margin-top: 20px; /* Отступ сверху */
+}
+
+/* Красный круг (ошибка) */
+.error-circle {
+    background-color: red;
+}
+
+/* Зеленый круг (успех) */
+.success-circle {
+    background-color: green;
+}
