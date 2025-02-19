@@ -4,6 +4,7 @@
     height: 50px; /* Высота круга */
     border-radius: 50%; /* Делаем круг */
     margin-top: 20px; /* Отступ сверху */
+    display: inline-block; /* Убедимся, что элементы отображаются корректно */
 }
 
 /* Красный круг (ошибка) */
@@ -14,4 +15,10 @@
 /* Зеленый круг (успех) */
 .success-circle {
     background-color: green;
+}
+
+/* Контейнер для сообщений */
+#message-container {
+    text-align: center; /* Центрируем сообщения */
+    margin-top: 20px; /* Отступ сверху */
 }

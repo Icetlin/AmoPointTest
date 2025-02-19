@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Проверяем  есть ли ошибки при загрузке файла
     if ($file['error'] != UPLOAD_ERR_OK) {
         // Если есть ошибка, выводим красный круг
-        echo "<div class='error-circle'></div>";
+        echo "<div><div class='error-circle' style='width: 50px; height: 50px; border-radius: 50%; background-color: red; display: inline-block; margin-top: 20px;'></div></div>";
         exit; // Завершаем выполнение скрипта
     }
 
@@ -62,5 +62,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <input type="file" name="file" accept=".txt"> <!-- Поле для выбора файла -->
     <button type="submit">Загрузить</button> <!-- Кнопка отправки формы -->
 </form>
+
+<div id="message-container"></div>
 </body>
 </html>
+
+
+<!--php -S localhost:8008 -dxdebug.mode=debug -dxdebug.start_with_request=yes-->
